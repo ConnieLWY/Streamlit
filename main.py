@@ -25,6 +25,16 @@ import pandas as pd
 
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 
+import os
+from twilio.rest import Client
+
+account_sid = os.environ['ACbf60fd1348fcd68d645ce6eb929cd63f']
+auth_token = os.environ['f1fd819b0930285aba8f00a221adaa7d']
+client = Client(account_sid, auth_token)
+
+token = client.tokens.create()
+
+
 HERE = Path(__file__).parent
 
 logger = logging.getLogger(__name__)
@@ -194,11 +204,13 @@ def app_object_detection():
             return av.VideoFrame.from_ndarray(image, format="bgr24")
     
     RTC_CONFIGURATION = RTCConfiguration(
-    {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
+    {
+      "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+    }
     )
 
     webrtc_streamer(
-        key="WYH",
+        key="Detect",
         mode=WebRtcMode.SENDRECV,
         rtc_configuration=RTC_CONFIGURATION,
         media_stream_constraints={"video": True, "audio": False},
