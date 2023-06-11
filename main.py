@@ -25,14 +25,6 @@ import pandas as pd
 
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 
-import os
-from twilio.rest import Client
-
-account_sid = os.environ['ACbf60fd1348fcd68d645ce6eb929cd63f']
-auth_token = os.environ['f1fd819b0930285aba8f00a221adaa7d']
-client = Client(account_sid, auth_token)
-
-token = client.tokens.create()
 
 
 HERE = Path(__file__).parent
