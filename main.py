@@ -170,11 +170,14 @@ model.setInputParams(size=(608, 608), scale=1/255, swapRB=True)
 
 
 def app_object_detection():
+    
 
     class Video:
 
         def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
             image = frame.to_ndarray(format="bgr24")
+
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
             classes, scores, boxes = model.detect(
                 image, Conf_threshold, NMS_threshold)
@@ -194,7 +197,7 @@ def app_object_detection():
     {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
     )
 
-    webrtc_ctx = webrtc_streamer(
+    webrtc_streamer(
         key="WYH",
         mode=WebRtcMode.SENDRECV,
         rtc_configuration=RTC_CONFIGURATION,
