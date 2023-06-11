@@ -171,7 +171,7 @@ model.setInputParams(size=(608, 608), scale=1/255, swapRB=True)
 
 def app_object_detection():
 
-    class Video(VideoProcessorBase):
+    class Video:
 
         def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
             image = frame.to_ndarray(format="bgr24")
