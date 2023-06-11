@@ -4,8 +4,8 @@ matplotlib
 numpy
 opencv-python-headless
 pydub
-streamlit==1.3.1
-streamlit_webrtc==0.25.1
+streamlit
+streamlit_webrtc=>0.25.0
 typing_extensions
 openpyxl
 ffmpeg-python
