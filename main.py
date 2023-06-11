@@ -176,8 +176,8 @@ model_weight = "models/yolov4-custom_5000.weights"
 
 # darknet files
 net = cv2.dnn.readNet(model_weight, model_config_file)
-net.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
+net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
+net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
 # Load Model
 model = cv2.dnn_DetectionModel(net)
