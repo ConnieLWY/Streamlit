@@ -23,13 +23,7 @@ import time
 import pandas as pd
 
 
-from streamlit_webrtc import (
-    AudioProcessorBase,
-    ClientSettings,
-    VideoProcessorBase,
-    WebRtcMode,
-    webrtc_streamer,
-)
+from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 
 HERE = Path(__file__).parent
 
@@ -38,15 +32,6 @@ logger = logging.getLogger(__name__)
 
 st.set_page_config(page_title="Object Detection", page_icon="🤖")
 
-
-WEBRTC_CLIENT_SETTINGS = ClientSettings(
-    rtc_configuration={"iceServers": [
-        {"urls": ["stun:stun.l.google.com:19302"]}]},
-    media_stream_constraints={
-        "video": True,
-        "audio": True,
-    },
-)
 
 
 def main():
@@ -204,16 +189,16 @@ def app_object_detection():
                             cv2.FONT_HERSHEY_COMPLEX, 0.5, color, 1)
 
             return av.VideoFrame.from_ndarray(image, format="bgr24")
+    
+    RTC_CONFIGURATION = RTCConfiguration(
+    {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
+    )
 
     webrtc_ctx = webrtc_streamer(
-        key="object-detection",
+        key="WYH",
         mode=WebRtcMode.SENDRECV,
-        rtc_configuration = {"iceServers": [
-        {"urls": ["stun:stun.l.google.com:19302"]}]},
-        media_stream_constraints = {
-        "video": True,
-        "audio": False,
-    },
+        rtc_configuration=RTC_CONFIGURATION,
+        media_stream_constraints={"video": True, "audio": False},
         video_processor_factory=Video,
         async_processing=True,
     )
