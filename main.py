@@ -208,8 +208,12 @@ def app_object_detection():
     webrtc_ctx = webrtc_streamer(
         key="object-detection",
         mode=WebRtcMode.SENDRECV,
-        rtc_configuration = WEBRTC_CLIENT_SETTINGS['rtc_configuration'],
-        media_stream_constraints = WEBRTC_CLIENT_SETTINGS['media_stream_constraints'],
+        rtc_configuration = {"iceServers": [
+        {"urls": ["stun:stun.l.google.com:19302"]}]},
+        media_stream_constraints = {
+        "video": True,
+        "audio": False,
+    },
         video_processor_factory=Video,
         async_processing=True,
     )
